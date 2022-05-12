@@ -58,12 +58,33 @@
   <audio data-key="76" src="sounds/tink.wav"></audio>
 
 <script>
+<<<<<<< HEAD:practices/index-START.html
   window.addEventListener('keydown', function(pressed){
     const audio = document.querySelector(`audio[data-key="${pressed.keyCode}"]`);
     if(!audio) return;
     // console.log(audio);
     audio.play();
   });
+=======
+  function playSound(pressed) {
+    const audio = document.querySelector(`audio[data-key="${pressed.keyCode}"]`);
+    const key = document.querySelector(`.key[data-key="${pressed.keyCode}"]`);
+    if (!audio) return;
+    audio.currentTime = 0;
+    audio.play();
+    key.classList.add('playing');
+  }
+
+  function removeTransition(pressed){
+    if(pressed.propertyName !== 'transform') return;
+    this.classList.remove('playing');
+  }
+
+  const keys = document.querySelectorAll('.key');
+  keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+
+  window.addEventListener('keydown', playSound);
+>>>>>>> 88cc481682a7ab0b834021c30dd3ba7cdf7db2c2:practices/1.-Drums/index-START.html
 </script>
 
 
